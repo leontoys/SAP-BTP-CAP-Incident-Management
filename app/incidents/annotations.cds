@@ -1,4 +1,6 @@
 using ProcessorService as service from '../../srv/services';
+using from '../../db/schema';
+
 annotate service.Incidents with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
@@ -35,23 +37,28 @@ annotate service.Incidents with @(
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
-            Label : 'customer_ID',
-            Value : customer_ID,
-        },
-        {
-            $Type : 'UI.DataField',
             Value : title,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'urgency_code',
-            Value : urgency_code,
+            Value : customer.name,
+            Label : '{i18n>Customer}',
         },
         {
             $Type : 'UI.DataField',
-            Label : 'status_code',
-            Value : status_code,
+            Value : status.descr,
+            Label : '{i18n>Status}',
+            Criticality : status.criticality,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : urgency.descr,
+            Label : '{i18n>Urgency}',
+        },
+    ],
+    UI.SelectionFields : [
+        status_code,
+        urgency_code,
     ],
 );
 
@@ -83,5 +90,27 @@ annotate service.Incidents with {
             },
         ],
     }
+};
+
+annotate service.Incidents with {
+    status @(
+        Common.Label : '{i18n>Status}',
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.Incidents with {
+    urgency @(
+        Common.Label : '{i18n>Urgency}',
+        Common.ValueListWithFixedValues : true,
+    )
+};
+
+annotate service.Status with {
+    code @Common.Text : descr
+};
+
+annotate service.Urgency with {
+    code @Common.Text : descr
 };
 
