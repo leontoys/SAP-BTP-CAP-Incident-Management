@@ -3,9 +3,10 @@ const { SELECT } = require('@sap/cds/lib/ql/cds-ql')
 
 class ProcessorService extends cds.ApplicationService {
     //register custom event handlers
-    init(){
+    async init(){
         this.before("CREATE","Incidents",(req)=>this.changeUrgencyDueToSubject(req.data))
         this.before("UPDATE","Incidents", (req)=> this.onUpdate(req))
+        this.on("READ","Incidents",(req)=>this.onCustomerRead(req))//added read
 
         return super.init()
     }
@@ -24,6 +25,10 @@ class ProcessorService extends cds.ApplicationService {
         if(closed) {
             req.reject `Can't modify a closed incident`
         }
+    }
+
+    async onCustomerRead(req){
+        
     }
 
 
