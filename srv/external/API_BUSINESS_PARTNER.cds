@@ -2131,7 +2131,8 @@ service API_BUSINESS_PARTNER {
     to_BuPaIdentification : Association to many A_BuPaIdentification {  };
     to_BuPaIndustry : Association to many A_BuPaIndustry {  };
     to_BusinessPartner : Association to A_BPFinancialServicesExtn {  };
-    to_BusinessPartnerAddress : Association to many A_BusinessPartnerAddress {  };
+    to_BusinessPartnerAddress : Association to many A_BusinessPartnerAddress 
+      on to_BusinessPartnerAddress.BusinessPartner = BusinessPartner; //added this
     to_BusinessPartnerAlias : Association to many A_BusinessPartnerAlias {  };
     to_BusinessPartnerBank : Association to many A_BusinessPartnerBank {  };
     to_BusinessPartnerContact : Association to many A_BusinessPartnerContact {  };
@@ -2299,10 +2300,12 @@ service API_BUSINESS_PARTNER {
     to_AddressUsage : Association to many A_BuPaAddressUsage {  };
     to_BPAddrDepdntIntlLocNumber : Association to A_BPAddrDepdntIntlLocNumber {  };
     to_BPIntlAddressVersion : Association to many A_BPIntlAddressVersion {  };
-    to_EmailAddress : Association to many A_AddressEmailAddress {  };
+    to_EmailAddress : Association to many A_AddressEmailAddress 
+     on to_EmailAddress.AddressID = AddressID;//added this 
     to_FaxNumber : Association to many A_AddressFaxNumber {  };
     to_MobilePhoneNumber : Association to many A_AddressPhoneNumber {  };
-    to_PhoneNumber : Association to many A_AddressPhoneNumber {  };
+    to_PhoneNumber : Association to many A_AddressPhoneNumber
+    on to_PhoneNumber.AddressID = AddressID;//added this
     to_URLAddress : Association to many A_AddressHomePageURL {  };
   };
 
