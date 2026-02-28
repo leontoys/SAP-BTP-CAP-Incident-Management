@@ -1,7 +1,7 @@
 const cds = require('@sap/cds')
 const { SELECT } = require('@sap/cds/lib/ql/cds-ql')
 const { default : axios} = require('axios')
-const { GET, POST, DELETE, PATCH, expect } = cds.test(__dirname+'../../')
+const { GET, POST, DELETE, PATCH, expect } = cds.test(__dirname+'../../', '--with-mocks')
 
 axios.defaults.auth = {username:'alice'}
 
